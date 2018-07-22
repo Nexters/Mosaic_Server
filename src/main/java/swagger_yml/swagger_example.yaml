@@ -1,0 +1,157 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a API document for CRUD Service"
+  version: "0.0.2"
+  title: "CRUD-api"
+  contact:
+    email: "origin_man@naver.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api-prod.crud.io"
+basePath: "/"
+tags:
+- name: "items"
+  description: "items"
+schemes:
+- "http"
+paths:
+  /items:
+    post:
+      tags:
+      - "item"
+      summary: "새로운 아이템 등록"
+      description: ""
+      operationId: "create_item"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/item"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/response"
+        400:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/response"
+      x-swagger-router-controller: "swagger_server.controllers.item_controller"
+  /items/{itemId}:
+    get:
+      tags:
+      - "item"
+      summary: ""
+      description: "아이디로 아이템 검색"
+      operationId: "get_item"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "item id"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/item"
+        400:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/response"
+      x-swagger-router-controller: "swagger_server.controllers.item_controller"
+  /items/delete/{itemId}:
+    delete:
+      tags:
+      - "item"
+      summary: ""
+      description: "아이디로 아이템 삭제"
+      operationId: "delte_item"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "item id"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/response"
+        400:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/response"
+      x-swagger-router-controller: "swagger_server.controllers.item_controller"
+  /items/put/{itemId}:
+    put:
+      tags:
+      - "item"
+      summary: ""
+      description: "아이디로 아이템 수정"
+      operationId: "update_item"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "item id"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/response"
+        400:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/response"
+      x-swagger-router-controller: "swagger_server.controllers.item_controller"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  item:
+    type: "object"
+    properties:
+      itemId:
+        type: "integer"
+        format: "int32"
+      itemName:
+        type: "string"
+      witdth:
+        type: "integer"
+        format: "int32"
+      height:
+        type: "integer"
+        format: "int32"
+    example:
+      itemId: 0
+      itemName: "itemName"
+      witdth: 6
+      height: 1
+  response:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+    example:
+      message: "message"
+  AddVideoResponse_data:
+    type: "object"
+    properties:
+      video_id:
+        type: "string"

@@ -1,0 +1,76 @@
+swagger: "2.0"
+info:
+  description: "Mosic api"
+  version: "1.0.0"
+  title: "mosaic-api"
+  contact:
+    email: "angointeam@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "mosaic.api.io"
+basePath: "/"
+tags:
+- name: "User"
+  description: ""
+schemes:
+- "http"
+paths:
+  /signin:
+    post:
+      tags:
+      - "User"
+      summary: "사용자 인증"
+      description: "사용자 인증"
+      operationId: "user_certification"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: body
+        description: ""
+        required: true
+        schema:
+          $ref: '#/definitions/user'
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/signin_response'
+        400:
+          description: "Invalid input"
+          schema:
+            $ref: '#/definitions/sign_bad_response'
+        401:
+          description: "Invalid input"
+          schema:
+            $ref: '#/definitions/sign_bad_response'
+
+
+
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  user:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+  signin_response:
+    type: "object"
+    properties:
+      uuid:
+        type: "string"
+      email:
+        type: "string"
+      nickname:
+        type: "string"
+  sign_bad_response:
+    type: "object"
+    properties:
+      result:
+        type: "string"
+
